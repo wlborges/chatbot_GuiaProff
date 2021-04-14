@@ -4,7 +4,7 @@ const routes=Router();
 
 //padrão
 routes.get('/',(req,res) =>{
-    return res.json({status:200,msg:'API em funcionamento'})
+    return res.status(200).json({msg:"API em funcionamento"})
   })
 
   module.exports=routes; 
