@@ -1,0 +1,22 @@
+{
+  "name": "chatbot_guiaproff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wlborges/chatbot_GuiaProff.git",
+  "author": "Wellington Lourenço Borges <53665329+wlborges@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "scripts": {
+    "dev": "env-cmd -f ./src/.env nodemon index.js",
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
