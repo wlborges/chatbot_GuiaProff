@@ -8,9 +8,9 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 module.exports={
     async createSession(req, res){
         let sessionId = req.sessionId
-        var timeInMs = Date.now();
+        var sessionTime = new Date
         //console.log(req.sessionId)
-        return res.status(200).json({sessionId, timeInMs})
+        return res.status(200).json({sessionId, "sessionTime" : sessionTime.toISOString()})
         },
 
     async sendMessage(req, res){
