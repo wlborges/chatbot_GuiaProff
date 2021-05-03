@@ -10,13 +10,13 @@ module.exports={
         const assistant = new AssistantV2({
         version: '2020-09-24',
         authenticator: new IamAuthenticator({
-            apikey: 'm5vemK5n0gBj3b8mSWzZNbT5uBLerEgaqlrk1OU8YAPL',
+            apikey: process.env.APIKEY,
         }),
-        serviceUrl: 'https://api.us-south.assistant.watson.cloud.ibm.com/instances/e11d1f95-6099-40f4-b840-5ccd92f2f115',
+        serviceUrl: process.env.SERVICEURL,
         });
 
         await assistant.createSession({
-            assistantId: '00af6a77-24dc-4b21-95e9-13a884be1b15'
+            assistantId: process.env.ASSISTANTID
         })
         .then(res => {
             req.sessionId= res.result.session_id
@@ -25,7 +25,7 @@ module.exports={
         })
         .catch(err => {
             //console.log(err);
-            return res.status(400).json(err)
+            return res.status(err.status).json(err)
         });
             },
 
@@ -35,13 +35,13 @@ module.exports={
         const assistant = new AssistantV2({
             version: '2020-09-24',
             authenticator: new IamAuthenticator({
-            apikey: 'm5vemK5n0gBj3b8mSWzZNbT5uBLerEgaqlrk1OU8YAPL',
+            apikey: process.env.APIKEY,
             }),
-            serviceUrl: 'https://api.us-south.assistant.watson.cloud.ibm.com/instances/e11d1f95-6099-40f4-b840-5ccd92f2f115',
+            serviceUrl: process.env.SERVICEURL,
             });
           
           assistant.message({
-            assistantId: '00af6a77-24dc-4b21-95e9-13a884be1b15',
+            assistantId: process.env.ASSISTANTID,
             sessionId,
             input: {
               'message_type': 'text',
