@@ -25,7 +25,7 @@ module.exports={
         })
         .catch(err => {
             //console.log(err);
-            return res.status(err.status).json({err,"apikey":process.env.APIKEY,assistantId: process.env.ASSISTANTID, serviceUrl: process.env.SERVICEURL})
+            return res.status(err.status).json(err)
         });
             },
 
