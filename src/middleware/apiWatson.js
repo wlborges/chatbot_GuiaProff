@@ -30,31 +30,42 @@ module.exports={
             },
 
     async sendMessage(req, res, next){
-        let sessionId = req.body.sessionId
-        let text = req.body.text
-        const assistant = new AssistantV2({
-            version: '2020-09-24',
-            authenticator: new IamAuthenticator({
-            apikey: process.env.APIKEY,
-            }),
-            serviceUrl: process.env.SERVICEURL,
-            });
-          
-          assistant.message({
-            assistantId: process.env.ASSISTANTID,
-            sessionId,
-            input: {
-              'message_type': 'text',
-              'text': text
-              }
-            })
-            .then(res => {
-              req.result = res.result
-              next()
-            })
-            .catch(err => {
-              //console.log(err);
-              return res.status(err.status).json(err)
-            });
+        try {
+          var sessionId = req.body.sessionId
+          var text = req.body.text
+
+          if(!sessionId | !text){
+            return res.status(400).json({"generic":[{"response_type": "text","text": "Parâmetros inválidos!"}]})
+          }
+          else{
+            const assistant = new AssistantV2({
+                version: '2020-09-24',
+                authenticator: new IamAuthenticator({
+                apikey: process.env.APIKEY,
+                }),
+                serviceUrl: process.env.SERVICEURL,
+                });
+              
+              assistant.message({
+                assistantId: process.env.ASSISTANTID,
+                sessionId,
+                input: {
+                  'message_type': 'text',
+                  'text': text
+                  }
+                })
+                .then(res => {
+                  req.result = res.result
+                  next()
+                })
+                .catch(err => {
+                  return res.status(401).json({"generic":[{"response_type": "text","text": "Sessão inválida!"}]})
+                });
+          }
+
+        } catch (error) {
+          next()
+        }
+        
     }
 }
