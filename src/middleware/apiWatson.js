@@ -51,7 +51,10 @@ module.exports={
                 sessionId,
                 input: {
                   'message_type': 'text',
-                  'text': text
+                  'text': text,
+                  options:{
+                    'return_context': true
+                  }
                   }
                 })
                 .then(res => {
