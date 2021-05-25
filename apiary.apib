@@ -1,0 +1,85 @@
+FORMAT: 1A
+HOST: https://guiaproff.herokuapp.com/
+
+# Chatbot GuiaProff
+
+## Introdução
+
+Projeto <a href="https://guiaproff.fun">link para site</a>
+
+## Autenticação
+
+Para iniciar um chat com o GuiaProff, você deve criar uma nova sessão e enviar o 
+sessionId no parâmetro BODY da requisição.
+
+## Sessão [/create]
+
+### Criando nova sessão [GET]
+
+Cada sessão criada será expirada em 5 minutos de inatividade.
+
++ Response 201 (application/json)
+
+        [
+            {
+                "sessionId": "6bcda248-12e5-4f6b-8c56-9a764a10a839",
+                "creationTime": "2021-05-04T01:59:30.306Z"
+            }
+        ]
+
+## Mensagens [/send]
+
+### Enviando Mensagens [POST]
+
+
+
++ Request (application/json)
+
+        {
+            "sessionId": "6bcda248-12e5-4f6b-8c56-9a764a10a839",
+            "text": "olá"
+        }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "generic": [
+                {
+                  "response_type": "text",
+                  "text": "Olá, sou o GUIA PROFF. "
+                },
+                {
+                  "response_type": "text",
+                  "text": "Vou te fazer algumas perguntas para  te auxiliar com o ensino da criança."
+                },
+                {
+                  "response_type": "text",
+                  "text": "Qual a idade da criança?"
+                }
+              ]
+            }
+            
++ Response 400 (application/json)
+    + Body
+    
+            {
+                "generic": [
+                {
+                  "response_type": "text",
+                  "text": "Parâmetros inválidos!"
+                }
+              ]
+            }
+        
++ Response 401 (application/json)
+    + Body
+    
+            {
+                "generic": [
+                {
+                  "response_type": "text",
+                  "text": "Sessão inválida!"
+                }
+              ]
+            }
