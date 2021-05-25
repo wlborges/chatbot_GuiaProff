@@ -15,7 +15,7 @@ module.exports={
 
     async sendMessage(req, res){
       try {
-          var generic = req.result
+          var generic = req.result.output.generic
         if (generic == "") {
             return res.status(200).json({"generic":[{"response_type": "text","text": "Mensagem não compreendida pelo GuiaProff!"}]})
         } else {
